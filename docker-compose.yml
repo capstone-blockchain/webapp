@@ -1,0 +1,14 @@
+version: '2'
+services:
+  spa:
+    command: sh -c "yarn; npm start"
+    image: blockchain_webapp
+    volumes:
+     - "./spa:/spa"
+    environment:
+      TERM: xterm-256color
+    ports:
+      - 3000:3000
+    stdin_open: true
+    tty: true
+    container_name: blockchain_webapp
