@@ -1,0 +1,16 @@
+{
+  "name": "rest",
+  "version": "1.0.0",
+  "description": "rest",
+  "main": "index.js",
+  "repository": "https://github.com/capstone-blockchain/webapp.git",
+  "author": "joebui",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon --inspect=0.0.0.0:9229 index.js"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "socket.io": "^2.1.1"
+  }
+}

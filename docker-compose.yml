@@ -12,3 +12,17 @@ services:
     stdin_open: true
     tty: true
     container_name: blockchain_webapp
+
+  rest:
+    command: sh -c "yarn; npm start"
+    image: blockchain_rest
+    volumes:
+      - "./rest:/rest"
+    environment:
+      TERM: xterm-256color
+      DEBUG: '*'
+    ports:
+      - 5000:5000
+    stdin_open: true
+    tty: true
+    container_name: blockchain_rest
