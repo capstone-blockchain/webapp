@@ -1,10 +1,10 @@
-version: '2'
+version: "2"
 services:
   spa:
     command: sh -c "yarn; npm start"
     image: blockchain_webapp
     volumes:
-     - "./spa:/spa"
+      - "./spa:/spa"
     environment:
       TERM: xterm-256color
     ports:
@@ -20,7 +20,9 @@ services:
       - "./rest:/rest"
     environment:
       TERM: xterm-256color
-      DEBUG: '*'
+      DEBUG: "*"
+      BLOCKCHAIN_NODE_IP: node1
+      MQTT_BROKER_IP: broker
     ports:
       - 5000:5000
     stdin_open: true
