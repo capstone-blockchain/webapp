@@ -2,6 +2,7 @@ const app = require("express")()
 const server = require("http").Server(app)
 const Client = require("node-rest-client").Client
 const mqtt = require("mqtt")
+const topics = require("./mqtt-topics")
 
 global.mqttClient = mqtt.connect(`mqtt://${process.env.MQTT_BROKER_IP}`)
 global.nodeIp = process.env.BLOCKCHAIN_NODE_IP
@@ -20,22 +21,28 @@ app.use((req, res, next) => {
 })
 
 mqttClient.on("connect", () => {
-  mqttClient.subscribe("BROADCAST_BLOCKCHAIN")
+  mqttClient.subscribe(topics.NEW_BLOCK_ADDED)
 })
 
-app.get("/test", (req, res) => {
-  client.get(`http://${global.nodeIp}:3000/blocks`, data => {
-    mqttClient.publish("REQUEST_BLOCKCHAIN", "")
-    mqttClient.on("message", async (topic, message) => {
-      switch (topic) {
-        case "BROADCAST_BLOCKCHAIN":
-          res.json(JSON.parse(message.toString()))
-          break
-        default:
-          res.json("nothing")
-          break
-      }
-    })
+mqttClient.on("message", async (topic, message) => {
+  switch (topic) {
+    case topics.NEW_BLOCK_ADDED:
+      break
+    default:
+      break
+  }
+})
+
+app.get("/blockchain", (req, res) => {
+  mqttClient.subscribe(topics.BROADCAST_BLOCKCHAIN_WEBAPP)
+  mqttClient.publish(topics.REQUEST_BLOCKCHAIN_WEBAPP, "")
+
+  mqttClient.on("message", async (topic, message) => {
+    switch (topic) {
+      case topics.BROADCAST_BLOCKCHAIN_WEBAPP:
+        mqttClient.unsubscribe(topics.BROADCAST_BLOCKCHAIN_WEBAPP)
+        res.json(JSON.parse(message.toString()))
+    }
   })
 })
 

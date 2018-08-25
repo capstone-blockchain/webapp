@@ -1,15 +1,10 @@
-import { takeEvery } from "redux-saga/effects";
+import { takeEvery } from "redux-saga/effects"
 
-import {
-  UPLOAD_PROJECT_PICTURE_REQUESTED,
-  UPLOAD_UPDATE_ATTACHMENT_REQUESTED
-} from "../actions/types";
-import { uploadProjectPicture } from "./project-picture-upload";
-import { uploadAttachments } from "./update-attachment-upload";
+import { GET_BLOCKCHAIN } from "../actions/types"
+import { getBlockchain } from "./get-blockchain"
 
 function* rootSaga() {
-  yield takeEvery(UPLOAD_PROJECT_PICTURE_REQUESTED, uploadProjectPicture);
-  yield takeEvery(UPLOAD_UPDATE_ATTACHMENT_REQUESTED, uploadAttachments);
+  yield takeEvery(GET_BLOCKCHAIN, getBlockchain)
 }
 
-export default rootSaga;
+export default rootSaga

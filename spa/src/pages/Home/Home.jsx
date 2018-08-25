@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import { connect } from "react-redux"
 import {
   Navbar,
   NavbarBrand,
@@ -10,8 +11,16 @@ import {
   CardTitle
 } from "reactstrap"
 
+import { getBlockchain } from "../../redux/actions/blockchain-action"
+
 class Home extends Component {
+  componentDidMount() {
+    const { dispatch } = this.props
+    dispatch(getBlockchain())
+  }
+
   render() {
+    const { reducer } = this.props
     return (
       <div>
         <Navbar color="dark" dark expand="md" className="navigation-bar">
@@ -19,11 +28,11 @@ class Home extends Component {
         </Navbar>
         <div className="container-fluid">
           <Row>
-            {[1, 2, 3, 4, 5, 6].map(v => (
-              <Col md={3}>
+            {reducer.blockchain.map(v => (
+              <Col md={3} key={v.index}>
                 <Card className="block">
                   <CardBody>
-                    <CardTitle className="index">{v}</CardTitle>
+                    <CardTitle className="index">{v.index}</CardTitle>
                     <hr />
                     <CardText>
                       <div>
@@ -36,13 +45,13 @@ class Home extends Component {
                     <hr />
                     <CardText>
                       <div>
-                        <b>Date: </b> <span>02-07-2018 00:00:00</span>
+                        <b>Date: </b> <span>{v.timestamp}</span>
                       </div>
                       <div>
-                        <b>Hash: </b> <span>79GJKGH98790</span>
+                        <b>Hash: </b> <span>{v.hash}</span>
                       </div>
                       <div>
-                        <b>Previous hash: </b> <span>79GJKGH98790</span>
+                        <b>Previous hash: </b> <span>{v.previousHash}</span>
                       </div>
                     </CardText>
                   </CardBody>
@@ -56,4 +65,8 @@ class Home extends Component {
   }
 }
 
-export default Home
+function select(state) {
+  return { reducer: state.blockchainReducer }
+}
+
+export default connect(select)(Home)
