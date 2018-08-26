@@ -1,16 +1,22 @@
+/////////// INLUDE LIB ///////////
 const app = require("express")()
 const server = require("http").Server(app)
-const Client = require("node-rest-client").Client
+const bodyParser = require("body-parser")
 const mqtt = require("mqtt")
 const topics = require("./mqtt-topics")
+const socket = require("socket.io")(server)
+/////////// INLUDE LIB ///////////
 
+/////////// GLOBAL VARIABLES ///////////
 global.mqttClient = mqtt.connect(`mqtt://${process.env.MQTT_BROKER_IP}`)
 global.nodeIp = process.env.BLOCKCHAIN_NODE_IP
-
-const client = new Client()
+global.latestBlock = {}
+/////////// GLOBAL VARIABLES ///////////
 
 app.set("port", 5000)
 app.options("*", require("cors")())
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*")
   res.header(
@@ -44,6 +50,11 @@ app.get("/blockchain", (req, res) => {
         res.json(JSON.parse(message.toString()))
     }
   })
+})
+
+app.post("/block", (req, res) => {
+  socket.emit("newBlock", req.body)
+  res.status(200).json("success")
 })
 
 server.listen(app.get("port"), "0.0.0.0", () => {

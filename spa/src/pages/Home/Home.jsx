@@ -10,13 +10,20 @@ import {
   CardBody,
   CardTitle
 } from "reactstrap"
+import { socketConnect } from "socket.io-react"
 
-import { getBlockchain } from "../../redux/actions/blockchain-action"
+import {
+  getBlockchain,
+  getNewBlock
+} from "../../redux/actions/blockchain-action"
 
 class Home extends Component {
   componentDidMount() {
-    const { dispatch } = this.props
+    const { dispatch, socket } = this.props
     dispatch(getBlockchain())
+    socket.on("newBlock", data => {
+      dispatch(getNewBlock(data))
+    })
   }
 
   render() {
@@ -35,24 +42,22 @@ class Home extends Component {
                     <CardTitle className="index">{v.index}</CardTitle>
                     <hr />
                     <CardText>
-                      <div>
-                        <b>Temperature: </b> <span>50 Celcius</span>
-                      </div>
-                      <div>
-                        <b>Humidity: </b> <span>40 %</span>
-                      </div>
+                      <b>Temperature: </b> <span>50 Celcius</span>
                     </CardText>
-                    <hr />
                     <CardText>
-                      <div>
-                        <b>Date: </b> <span>{v.timestamp}</span>
-                      </div>
-                      <div>
-                        <b>Hash: </b> <span>{v.hash}</span>
-                      </div>
-                      <div>
-                        <b>Previous hash: </b> <span>{v.previousHash}</span>
-                      </div>
+                      <b>Humidity: </b> <span>40 %</span>
+                    </CardText>
+
+                    <hr />
+
+                    <CardText>
+                      <b>Date: </b> <span>{v.timestamp}</span>
+                    </CardText>
+                    <CardText>
+                      <b>Hash: </b> <span>{v.hash}</span>
+                    </CardText>
+                    <CardText>
+                      <b>Previous hash: </b> <span>{v.previousHash}</span>
                     </CardText>
                   </CardBody>
                 </Card>
@@ -69,4 +74,4 @@ function select(state) {
   return { reducer: state.blockchainReducer }
 }
 
-export default connect(select)(Home)
+export default connect(select)(socketConnect(Home))
