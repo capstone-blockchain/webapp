@@ -17,6 +17,8 @@ import {
   getNewBlock
 } from "../../redux/actions/blockchain-action"
 
+const genesisBlock = "my genesis block!!"
+
 class Home extends Component {
   componentDidMount() {
     const { dispatch, socket } = this.props
@@ -42,10 +44,17 @@ class Home extends Component {
                     <CardTitle className="index">{v.index}</CardTitle>
                     <hr />
                     <CardText>
-                      <b>Temperature: </b> <span>50 Celcius</span>
+                      <b>Temperature: </b>{" "}
+                      <span>
+                        {v.data === genesisBlock ? 0 : v.data.substring(0, 2)}{" "}
+                        Celcius
+                      </span>
                     </CardText>
                     <CardText>
-                      <b>Humidity: </b> <span>40 %</span>
+                      <b>Humidity: </b>{" "}
+                      <span>
+                        {v.data === genesisBlock ? 0 : v.data.substring(2)} %
+                      </span>
                     </CardText>
 
                     <hr />
