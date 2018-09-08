@@ -21,7 +21,6 @@ services:
     environment:
       TERM: xterm-256color
       DEBUG: "*"
-      BLOCKCHAIN_NODE_IP: node1
       MQTT_BROKER_IP: broker
     ports:
       - 5000:5000

@@ -1,0 +1,14 @@
+{
+  "apps": [
+    {
+      "name": "back-end",
+      "script": "index.js",
+      "env": {
+        "MQTT_BROKER_IP": "172.16.72.94"
+      },
+      "error_file": "logs/err.log",
+      "out_file": "logs/out.log",
+      "log_date_format": "YYYY-MM-DD HH:mm:ss"
+    }
+  ]
+}

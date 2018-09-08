@@ -9,7 +9,6 @@ const socket = require("socket.io")(server)
 
 /////////// GLOBAL VARIABLES ///////////
 global.mqttClient = mqtt.connect(`mqtt://${process.env.MQTT_BROKER_IP}`)
-global.nodeIp = process.env.BLOCKCHAIN_NODE_IP
 global.latestBlock = {}
 /////////// GLOBAL VARIABLES ///////////
 
