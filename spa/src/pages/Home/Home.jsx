@@ -11,6 +11,7 @@ import {
   CardTitle
 } from "reactstrap"
 import { socketConnect } from "socket.io-react"
+import moment from "moment-timezone"
 
 import {
   getBlockchain,
@@ -60,7 +61,12 @@ class Home extends Component {
                     <hr />
 
                     <CardText>
-                      <b>Date: </b> <span>{v.timestamp}</span>
+                      <b>Date: </b>{" "}
+                      <span>
+                        {moment(v.timestamp)
+                          .tz("Asia/Ho_Chi_Minh")
+                          .format("LLLL")}
+                      </span>
                     </CardText>
                     <CardText>
                       <b>Hash: </b> <span>{v.hash}</span>
