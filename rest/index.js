@@ -52,7 +52,10 @@ app.get("/blockchain", (req, res) => {
 })
 
 app.post("/block", (req, res) => {
-  socket.emit("newBlock", req.body)
+  const block = req.body
+  block.index = parseInt(block.index)
+
+  socket.emit("newBlock", block)
   res.status(200).json("success")
 })
 

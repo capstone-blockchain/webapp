@@ -65,7 +65,7 @@ class Home extends Component {
                       <span>
                         {moment(v.timestamp)
                           .tz("Asia/Ho_Chi_Minh")
-                          .format("LLLL")}
+                          .format("MMMM Do YYYY, h:mm:ss a")}
                       </span>
                     </CardText>
                     <CardText>
