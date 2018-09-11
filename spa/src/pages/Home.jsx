@@ -1,24 +1,12 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import {
-  Navbar,
-  NavbarBrand,
-  Row,
-  Col,
-  Card,
-  CardText,
-  CardBody,
-  CardTitle
-} from "reactstrap"
+import { Row, Col, Card, CardText, CardBody, CardTitle } from "reactstrap"
 import { socketConnect } from "socket.io-react"
 import moment from "moment-timezone"
 
-import {
-  getBlockchain,
-  getNewBlock
-} from "../../redux/actions/blockchain-action"
+import { getBlockchain, getNewBlock } from "../redux/actions/blockchain-action"
 
-const genesisBlock = "my genesis block!!"
+import Station from "./Station.jsx"
 
 class Home extends Component {
   componentDidMount() {
@@ -33,31 +21,32 @@ class Home extends Component {
     const { reducer } = this.props
     return (
       <div>
-        <Navbar color="dark" dark expand="md" className="navigation-bar">
-          <NavbarBrand href="/">Agriculture with blockchain</NavbarBrand>
-        </Navbar>
         <div className="container-fluid">
+          <h3>Blockchain</h3>
           <Row>
             {reducer.blockchain.map(v => (
-              <Col md={3} key={v.index}>
+              <Col md={4} key={v.index}>
                 <Card className="block">
                   <CardBody>
                     <CardTitle className="index">{v.index}</CardTitle>
                     <hr />
-                    <CardText>
-                      <b>Temperature: </b>{" "}
-                      <span>
-                        {v.data === genesisBlock ? 0 : v.data.substring(0, 2)}{" "}
-                        Celcius
-                      </span>
-                    </CardText>
-                    <CardText>
-                      <b>Humidity: </b>{" "}
-                      <span>
-                        {v.data === genesisBlock ? 0 : v.data.substring(2)} %
-                      </span>
-                    </CardText>
-
+                    <Row>
+                      <Station
+                        temp={v.data.substring(0, 2)}
+                        humidity={v.data.substring(2, 4)}
+                        station="Station 1"
+                      />
+                      <Station
+                        temp={v.data.substring(4, 6)}
+                        humidity={v.data.substring(6, 8)}
+                        station="Station 2"
+                      />
+                      <Station
+                        station="Station 3"
+                        temp={v.data.substring(8, 10)}
+                        humidity={v.data.substring(10, 12)}
+                      />
+                    </Row>
                     <hr />
 
                     <CardText>

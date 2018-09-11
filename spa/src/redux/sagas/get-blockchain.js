@@ -1,12 +1,22 @@
 import { call, put } from "redux-saga/effects"
 
 import baseService from "./baseService"
-import { DISPLAY_BLOCKCHAIN } from "../actions/types"
+import {
+  DISPLAY_BLOCKCHAIN,
+  DISPLAY_BLOCKCHAIN_DATASET
+} from "../actions/types"
 
 export function* getBlockchain(action) {
   try {
     const data = yield call(upload, action)
     yield put({ type: DISPLAY_BLOCKCHAIN, data })
+  } catch (e) {}
+}
+
+export function* getBlockchainDataset(action) {
+  try {
+    const data = yield call(upload, action)
+    yield put({ type: DISPLAY_BLOCKCHAIN_DATASET, data })
   } catch (e) {}
 }
 

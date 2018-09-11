@@ -2,6 +2,9 @@ $space: 30px;
 
 .navigation-bar {
   margin-bottom: $space;
+  .nav-item {
+    color: white;
+  }
 }
 
 .block {

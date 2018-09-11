@@ -1,8 +1,18 @@
-import { GET_BLOCKCHAIN, RECEIVED_NEW_BLOCK } from "./types"
+import {
+  GET_BLOCKCHAIN,
+  GET_BLOCKCHAIN_DATASET,
+  RECEIVED_NEW_BLOCK
+} from "./types"
 
 export function getBlockchain() {
   return {
     type: GET_BLOCKCHAIN
+  }
+}
+
+export function getDatasetForDashboard() {
+  return {
+    type: GET_BLOCKCHAIN_DATASET
   }
 }
 
