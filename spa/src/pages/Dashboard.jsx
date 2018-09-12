@@ -26,7 +26,6 @@ class Dashboard extends Component {
     const { reducer } = this.props
     return (
       <div className="container-fluid">
-        <h3 className="title">Station 1</h3>
         {reducer.datasetStation1.length > 0 ? (
           <Line
             data={{
@@ -37,7 +36,7 @@ class Dashboard extends Component {
             height={50}
           />
         ) : null}
-        <h3 className="title">Station 2</h3>
+        {/* <h3 className="title">Station 2</h3>
         {reducer.datasetStation2.length > 0 ? (
           <Line
             data={{
@@ -58,7 +57,7 @@ class Dashboard extends Component {
             option={option}
             height={50}
           />
-        ) : null}
+        ) : null} */}
       </div>
     )
   }

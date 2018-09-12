@@ -43,34 +43,34 @@ export default function blockchainReducer(
             action.data.map(block => block.data.substring(2, 4))
           )
         ],
-        datasetStation2: [
-          chartDataset(
-            "Temperature (Celcius)",
-            "transparent",
-            "red",
-            action.data.map(block => block.data.substring(4, 6))
-          ),
-          chartDataset(
-            "Humidity (%)",
-            "transparent",
-            "green",
-            action.data.map(block => block.data.substring(6, 8))
-          )
-        ],
-        datasetStation3: [
-          chartDataset(
-            "Temperature (Celcius)",
-            "transparent",
-            "red",
-            action.data.map(block => block.data.substring(8, 10))
-          ),
-          chartDataset(
-            "Humidity (%)",
-            "transparent",
-            "green",
-            action.data.map(block => block.data.substring(10, 12))
-          )
-        ]
+        // datasetStation2: [
+        //   chartDataset(
+        //     "Temperature (Celcius)",
+        //     "transparent",
+        //     "red",
+        //     action.data.map(block => block.data.substring(4, 6))
+        //   ),
+        //   chartDataset(
+        //     "Humidity (%)",
+        //     "transparent",
+        //     "green",
+        //     action.data.map(block => block.data.substring(6, 8))
+        //   )
+        // ],
+        // datasetStation3: [
+        //   chartDataset(
+        //     "Temperature (Celcius)",
+        //     "transparent",
+        //     "red",
+        //     action.data.map(block => block.data.substring(8, 10))
+        //   ),
+        //   chartDataset(
+        //     "Humidity (%)",
+        //     "transparent",
+        //     "green",
+        //     action.data.map(block => block.data.substring(10, 12))
+        //   )
+        // ]
       })
 
     case RECEIVED_NEW_BLOCK:

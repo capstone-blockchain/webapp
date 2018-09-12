@@ -22,10 +22,9 @@ class Home extends Component {
     return (
       <div>
         <div className="container-fluid">
-          <h3>Blockchain</h3>
           <Row>
             {reducer.blockchain.map(v => (
-              <Col md={4} key={v.index}>
+              <Col md={3} key={v.index}>
                 <Card className="block">
                   <CardBody>
                     <CardTitle className="index">{v.index}</CardTitle>
@@ -36,7 +35,7 @@ class Home extends Component {
                         humidity={v.data.substring(2, 4)}
                         station="Station 1"
                       />
-                      <Station
+                      {/* <Station
                         temp={v.data.substring(4, 6)}
                         humidity={v.data.substring(6, 8)}
                         station="Station 2"
@@ -45,7 +44,7 @@ class Home extends Component {
                         station="Station 3"
                         temp={v.data.substring(8, 10)}
                         humidity={v.data.substring(10, 12)}
-                      />
+                      /> */}
                     </Row>
                     <hr />
 
